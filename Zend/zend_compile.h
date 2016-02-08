@@ -498,7 +498,7 @@ struct _zend_execute_data {
 #define EX_NUM_ARGS()			ZEND_CALL_NUM_ARGS(execute_data)
 
 #define ZEND_CALL_USES_STRICT_TYPES(call) \
-	(((call)->func->common.fn_flags & ZEND_ACC_STRICT_TYPES) != 0)
+	((((call)->func->common.fn_flags & ZEND_ACC_STRICT_TYPES) != 0) || CG(strict_types))
 
 #define EX_USES_STRICT_TYPES() \
 	ZEND_CALL_USES_STRICT_TYPES(execute_data)
