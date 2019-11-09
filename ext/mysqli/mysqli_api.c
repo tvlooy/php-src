@@ -133,7 +133,7 @@ static int mysqli_commit_or_rollback_libmysql(MYSQL * conn, zend_bool commit, co
 /* }}} */
 #endif
 
-/* {{{ proto mixed mysqli_affected_rows(object link)
+/* {{{ proto int mysqli_affected_rows(object link)
    Get number of affected rows in previous MySQL operation */
 PHP_FUNCTION(mysqli_affected_rows)
 {
@@ -786,7 +786,7 @@ PHP_FUNCTION(mysqli_data_seek)
 }
 /* }}} */
 
-/* {{{ proto void mysqli_debug(string debug)
+/* {{{ proto bool mysqli_debug(string debug)
 */
 PHP_FUNCTION(mysqli_debug)
 {
@@ -1174,7 +1174,7 @@ static void php_add_field_properties(zval *value, const MYSQL_FIELD *field)
 }
 /* }}} */
 
-/* {{{ proto mixed mysqli_fetch_field(object result)
+/* {{{ proto mixed mysqli_fetch_field(object result) object|bool
    Get column information from a result and return as an object */
 PHP_FUNCTION(mysqli_fetch_field)
 {
@@ -1197,7 +1197,7 @@ PHP_FUNCTION(mysqli_fetch_field)
 }
 /* }}} */
 
-/* {{{ proto mixed mysqli_fetch_fields(object result)
+/* {{{ proto array mysqli_fetch_fields(object result)
    Return array of objects containing field meta-data */
 PHP_FUNCTION(mysqli_fetch_fields)
 {
@@ -1227,7 +1227,7 @@ PHP_FUNCTION(mysqli_fetch_fields)
 }
 /* }}} */
 
-/* {{{ proto mixed mysqli_fetch_field_direct(object result, int offset)
+/* {{{ proto object|bool mysqli_fetch_field_direct(object result, int offset)
    Fetch meta-data for a single field */
 PHP_FUNCTION(mysqli_fetch_field_direct)
 {
@@ -1256,7 +1256,7 @@ PHP_FUNCTION(mysqli_fetch_field_direct)
 }
 /* }}} */
 
-/* {{{ proto mixed mysqli_fetch_lengths(object result)
+/* {{{ proto array|bool mysqli_fetch_lengths(object result)
    Get the length of each output in a result */
 PHP_FUNCTION(mysqli_fetch_lengths)
 {
@@ -1313,7 +1313,7 @@ PHP_FUNCTION(mysqli_field_count)
 }
 /* }}} */
 
-/* {{{ proto int mysqli_field_seek(object result, int fieldnr)
+/* {{{ proto bool mysqli_field_seek(object result, int fieldnr)
    Set result pointer to a specified field offset
 */
 PHP_FUNCTION(mysqli_field_seek)
@@ -2026,7 +2026,7 @@ PHP_FUNCTION(mysqli_stmt_send_long_data)
 }
 /* }}} */
 
-/* {{{ proto string|int|false mysqli_stmt_affected_rows(object stmt)
+/* {{{ proto int mysqli_stmt_affected_rows(object stmt)
    Return the number of rows affected in the last query for the given link. */
 PHP_FUNCTION(mysqli_stmt_affected_rows)
 {
@@ -2122,7 +2122,7 @@ PHP_FUNCTION(mysqli_stmt_free_result)
 }
 /* }}} */
 
-/* {{{ proto mixed mysqli_stmt_insert_id(object stmt)
+/* {{{ proto int mysqli_stmt_insert_id(object stmt)
    Get the ID generated from the previous INSERT operation */
 PHP_FUNCTION(mysqli_stmt_insert_id)
 {
@@ -2175,7 +2175,7 @@ PHP_FUNCTION(mysqli_stmt_reset)
 }
 /* }}} */
 
-/* {{{ proto mixed mysqli_stmt_num_rows(object stmt)
+/* {{{ proto int mysqli_stmt_num_rows(object stmt)
    Return the number of rows in statements result set */
 PHP_FUNCTION(mysqli_stmt_num_rows)
 {
@@ -2235,7 +2235,7 @@ PHP_FUNCTION(mysqli_sqlstate)
 }
 /* }}} */
 
-/* {{{ proto bool mysqli_ssl_set(object link ,string key ,string cert ,string ca ,string capath ,string cipher])
+/* {{{ proto bool mysqli_ssl_set(object link, string key, string cert, string ca, string capath, string cipher])
 */
 PHP_FUNCTION(mysqli_ssl_set)
 {
@@ -2244,7 +2244,7 @@ PHP_FUNCTION(mysqli_ssl_set)
 	char		*ssl_parm[5];
 	size_t			ssl_parm_len[5], i;
 
-	if (zend_parse_method_parameters(ZEND_NUM_ARGS(), getThis(), "Osssss", &mysql_link, mysqli_link_class_entry, &ssl_parm[0], &ssl_parm_len[0], &ssl_parm[1], &ssl_parm_len[1], &ssl_parm[2], &ssl_parm_len[2], &ssl_parm[3], &ssl_parm_len[3], &ssl_parm[4], &ssl_parm_len[4])   == FAILURE) {
+	if (zend_parse_method_parameters(ZEND_NUM_ARGS(), getThis(), "Osssss", &mysql_link, mysqli_link_class_entry, &ssl_parm[0], &ssl_parm_len[0], &ssl_parm[1], &ssl_parm_len[1], &ssl_parm[2], &ssl_parm_len[2], &ssl_parm[3], &ssl_parm_len[3], &ssl_parm[4], &ssl_parm_len[4]) == FAILURE) {
 		return;
 	}
 	MYSQLI_FETCH_RESOURCE_CONN(mysql, mysql_link, MYSQLI_STATUS_INITIALIZED);
@@ -2314,7 +2314,7 @@ PHP_FUNCTION(mysqli_refresh)
 }
 /* }}} */
 
-/* {{{ proto int mysqli_stmt_attr_set(object stmt, int attr, int mode)
+/* {{{ proto bool mysqli_stmt_attr_set(object stmt, int attr, int mode)
 */
 PHP_FUNCTION(mysqli_stmt_attr_set)
 {
@@ -2361,7 +2361,7 @@ PHP_FUNCTION(mysqli_stmt_attr_set)
 }
 /* }}} */
 
-/* {{{ proto int mysqli_stmt_attr_get(object stmt, int attr)
+/* {{{ proto int|bool mysqli_stmt_attr_get(object stmt, int attr)
 */
 PHP_FUNCTION(mysqli_stmt_attr_get)
 {
@@ -2424,7 +2424,7 @@ PHP_FUNCTION(mysqli_stmt_error)
 }
 /* }}} */
 
-/* {{{ proto mixed mysqli_stmt_init(object link)
+/* {{{ proto object|false mysqli_stmt_init(object link)
    Initialize statement object
 */
 PHP_FUNCTION(mysqli_stmt_init)
@@ -2434,7 +2434,7 @@ PHP_FUNCTION(mysqli_stmt_init)
 	zval			*mysql_link;
 	MYSQLI_RESOURCE	*mysqli_resource;
 
-	if (zend_parse_method_parameters(ZEND_NUM_ARGS(), getThis(), "O",&mysql_link, mysqli_link_class_entry) == FAILURE) {
+	if (zend_parse_method_parameters(ZEND_NUM_ARGS(), getThis(), "O", &mysql_link, mysqli_link_class_entry) == FAILURE) {
 		return;
 	}
 	MYSQLI_FETCH_RESOURCE_CONN(mysql, mysql_link, MYSQLI_STATUS_VALID);

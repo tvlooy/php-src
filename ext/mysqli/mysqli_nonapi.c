@@ -437,20 +437,20 @@ PHP_FUNCTION(mysqli_fetch_all)
 {
 	MYSQL_RES	*result;
 	zval		*mysql_result;
-	zend_long		mode = MYSQLND_FETCH_NUM;
+	zend_long		resulttype = MYSQLND_FETCH_NUM;
 
-	if (zend_parse_method_parameters(ZEND_NUM_ARGS(), getThis(), "O|l", &mysql_result, mysqli_result_class_entry, &mode) == FAILURE) {
+	if (zend_parse_method_parameters(ZEND_NUM_ARGS(), getThis(), "O|l", &mysql_result, mysqli_result_class_entry, &resulttype) == FAILURE) {
 		return;
 	}
 	MYSQLI_FETCH_RESOURCE(result, MYSQL_RES *, mysql_result, "mysqli_result", MYSQLI_STATUS_VALID);
 
-	if (!mode || (mode & ~MYSQLND_FETCH_BOTH)) {
-		php_error_docref(NULL, E_WARNING, "Mode can be only MYSQLI_FETCH_NUM, "
+	if (!resulttype || (resulttype & ~MYSQLND_FETCH_BOTH)) {
+		php_error_docref(NULL, E_WARNING, "Resulttype can be only MYSQLI_FETCH_NUM, "
 		                 "MYSQLI_FETCH_ASSOC or MYSQLI_FETCH_BOTH");
 		RETURN_FALSE;
 	}
 
-	mysqlnd_fetch_all(result, mode, return_value);
+	mysqlnd_fetch_all(result, resulttype, return_value);
 }
 /* }}} */
 
@@ -529,7 +529,7 @@ PHP_FUNCTION(mysqli_error_list)
 }
 /* }}} */
 
-/* {{{ proto string mysqli_stmt_error_list(object stmt)
+/* {{{ proto array mysqli_stmt_error_list(object stmt)
 */
 PHP_FUNCTION(mysqli_stmt_error_list)
 {
@@ -835,7 +835,7 @@ static int mysqlnd_dont_poll_zval_array_from_mysqlnd_array(MYSQLND **in_array, z
 }
 /* }}} */
 
-/* {{{ proto int mysqli_poll(array read, array write, array error, int sec [, int usec]) U
+/* {{{ proto int mysqli_poll(array read, array write, array error, int sec [, int usec])
    Poll connections */
 PHP_FUNCTION(mysqli_poll)
 {
@@ -893,7 +893,7 @@ PHP_FUNCTION(mysqli_poll)
 }
 /* }}} */
 
-/* {{{ proto int mysqli_reap_async_query(object link) U
+/* {{{ proto object mysqli_reap_async_query(object link)
    Poll connections */
 PHP_FUNCTION(mysqli_reap_async_query)
 {
@@ -946,7 +946,7 @@ PHP_FUNCTION(mysqli_reap_async_query)
 }
 /* }}} */
 
-/* {{{ proto object mysqli_stmt_get_result(object link) U
+/* {{{ proto object mysqli_stmt_get_result(object link)
    Buffer result set on client */
 PHP_FUNCTION(mysqli_stmt_get_result)
 {
@@ -1006,14 +1006,14 @@ PHP_FUNCTION(mysqli_get_warnings)
 PHP_FUNCTION(mysqli_stmt_get_warnings)
 {
 	MY_STMT				*stmt;
-	zval				*stmt_link;
+	zval				*mysql_stmt;
 	MYSQLI_RESOURCE		*mysqli_resource;
 	MYSQLI_WARNING		*w;
 
-	if (zend_parse_method_parameters(ZEND_NUM_ARGS(), getThis(), "O", &stmt_link, mysqli_stmt_class_entry) == FAILURE) {
+	if (zend_parse_method_parameters(ZEND_NUM_ARGS(), getThis(), "O", &mysql_stmt, mysqli_stmt_class_entry) == FAILURE) {
 		return;
 	}
-	MYSQLI_FETCH_RESOURCE_STMT(stmt, stmt_link, MYSQLI_STATUS_VALID);
+	MYSQLI_FETCH_RESOURCE_STMT(stmt, mysql_stmt, MYSQLI_STATUS_VALID);
 
 	if (mysqli_stmt_warning_count(stmt->stmt)) {
 		w = php_get_warnings(mysqli_stmt_get_connection(stmt->stmt));
@@ -1051,7 +1051,7 @@ PHP_FUNCTION(mysqli_set_charset)
 #endif
 
 #ifdef HAVE_MYSQLI_GET_CHARSET
-/* {{{ proto object mysqli_get_charset(object link) U
+/* {{{ proto object mysqli_get_charset(object link)
    returns a character set object */
 PHP_FUNCTION(mysqli_get_charset)
 {
@@ -1272,7 +1272,7 @@ PHP_FUNCTION(mysqli_release_savepoint)
 }
 /* }}} */
 
-/* {{{ proto bool mysqli_get_links_stats()
+/* {{{ proto array mysqli_get_links_stats()
    Returns information about open and cached links */
 PHP_FUNCTION(mysqli_get_links_stats)
 {

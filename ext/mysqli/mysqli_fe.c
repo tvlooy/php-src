@@ -535,12 +535,12 @@ const zend_function_entry mysqli_functions[] = {
 
 /* {{{ mysqli_link_methods[]
  *
- * Every user visible function must have an entry in mysqli_functions[].
+ * Every user visible function must have an entry in mysqli_link_methods[].
  */
 const zend_function_entry mysqli_link_methods[] = {
 	PHP_FALIAS(autocommit, mysqli_autocommit, arginfo_class_mysqli_autocommit)
 	PHP_FALIAS(begin_transaction, mysqli_begin_transaction, arginfo_class_mysqli_begin_transaction)
-	PHP_FALIAS(change_user,mysqli_change_user, arginfo_class_mysqli_change_user)
+	PHP_FALIAS(change_user, mysqli_change_user, arginfo_class_mysqli_change_user)
 	PHP_FALIAS(character_set_name, mysqli_character_set_name, arginfo_mysqli_no_params)
 	PHP_FALIAS(close, mysqli_close, arginfo_mysqli_no_params)
 	PHP_FALIAS(commit, mysqli_commit, arginfo_class_mysqli_commit)
@@ -556,8 +556,8 @@ const zend_function_entry mysqli_link_methods[] = {
 #endif
 	PHP_FALIAS(get_server_info, mysqli_get_server_info, arginfo_mysqli_no_params)
 	PHP_FALIAS(get_warnings, mysqli_get_warnings, arginfo_mysqli_no_params)
-	PHP_FALIAS(init,mysqli_init_method, arginfo_mysqli_no_params)
-	PHP_FALIAS(kill,mysqli_kill, arginfo_class_mysqli_kill)
+	PHP_FALIAS(init, mysqli_init_method, arginfo_mysqli_no_params)
+	PHP_FALIAS(kill, mysqli_kill, arginfo_class_mysqli_kill)
 	PHP_FALIAS(multi_query, mysqli_multi_query, arginfo_class_mysqli_multi_query)
 	PHP_FALIAS(__construct, mysqli_link_construct, arginfo_mysqli_connect)
 	PHP_FALIAS(more_results, mysqli_more_results, arginfo_mysqli_no_params)
@@ -579,7 +579,7 @@ const zend_function_entry mysqli_link_methods[] = {
 	PHP_FALIAS(release_savepoint, mysqli_release_savepoint, arginfo_class_mysqli_release_savepoint)
 	PHP_FALIAS(rollback, mysqli_rollback, arginfo_class_mysqli_rollback)
 	PHP_FALIAS(savepoint, mysqli_savepoint, arginfo_class_mysqli_savepoint)
-	PHP_FALIAS(select_db,mysqli_select_db, arginfo_class_mysqli_select_db)
+	PHP_FALIAS(select_db, mysqli_select_db, arginfo_class_mysqli_select_db)
 #ifdef HAVE_MYSQLI_SET_CHARSET
 	PHP_FALIAS(set_charset, mysqli_set_charset, arginfo_class_mysqli_set_charset)
 #endif
@@ -590,14 +590,14 @@ const zend_function_entry mysqli_link_methods[] = {
 	PHP_FALIAS(store_result, mysqli_store_result, arginfo_class_store_result)
 	PHP_FALIAS(thread_safe, mysqli_thread_safe, arginfo_mysqli_no_params)
 	PHP_FALIAS(use_result, mysqli_use_result, arginfo_mysqli_no_params)
-	PHP_FALIAS(refresh,mysqli_refresh, arginfo_class_mysqli_refresh)
+	PHP_FALIAS(refresh, mysqli_refresh, arginfo_class_mysqli_refresh)
 	PHP_FE_END
 };
 /* }}} */
 
 /* {{{ mysqli_result_methods[]
  *
- * Every user visible function must have an entry in mysqli_result_functions[].
+ * Every user visible function must have an entry in mysqli_result_methods[].
  */
 const zend_function_entry mysqli_result_methods[] = {
 	PHP_FALIAS(__construct, mysqli_result_construct, NULL)
@@ -612,7 +612,7 @@ const zend_function_entry mysqli_result_methods[] = {
 #endif
 	PHP_FALIAS(fetch_array, mysqli_fetch_array, arginfo_class_mysqli_fetch_array)
 	PHP_FALIAS(fetch_assoc, mysqli_fetch_assoc, arginfo_mysqli_no_params)
-	PHP_FALIAS(fetch_object,mysqli_fetch_object, arginfo_class_mysqli_fetch_object)
+	PHP_FALIAS(fetch_object, mysqli_fetch_object, arginfo_class_mysqli_fetch_object)
 	PHP_FALIAS(fetch_row, mysqli_fetch_row, arginfo_mysqli_no_params)
 	PHP_FALIAS(field_seek, mysqli_field_seek, arginfo_class_mysqli_result_and_fieldnr)
 	PHP_FALIAS(free_result, mysqli_free_result, arginfo_mysqli_no_params)
@@ -622,14 +622,14 @@ const zend_function_entry mysqli_result_methods[] = {
 
 /* {{{ mysqli_stmt_methods[]
  *
- * Every user visible function must have an entry in mysqli_stmt_functions[].
+ * Every user visible function must have an entry in mysqli_stmt_methods[].
  */
 const zend_function_entry mysqli_stmt_methods[] = {
 	PHP_FALIAS(__construct, mysqli_stmt_construct, NULL)
 	PHP_FALIAS(attr_get, mysqli_stmt_attr_get, arginfo_class_mysqli_stmt_attr_get)
-	PHP_FALIAS(attr_set,mysqli_stmt_attr_set, arginfo_class_mysqli_stmt_attr_set)
-	PHP_FALIAS(bind_param,mysqli_stmt_bind_param, arginfo_class_mysqli_stmt_bind_param)
-	PHP_FALIAS(bind_result,mysqli_stmt_bind_result, arginfo_class_mysqli_stmt_bind_result)
+	PHP_FALIAS(attr_set, mysqli_stmt_attr_set, arginfo_class_mysqli_stmt_attr_set)
+	PHP_FALIAS(bind_param, mysqli_stmt_bind_param, arginfo_class_mysqli_stmt_bind_param)
+	PHP_FALIAS(bind_result, mysqli_stmt_bind_result, arginfo_class_mysqli_stmt_bind_result)
 	PHP_FALIAS(close, mysqli_stmt_close, arginfo_mysqli_no_params)
 	PHP_FALIAS(data_seek, mysqli_stmt_data_seek, arginfo_class_mysqli_data_seek)
 	PHP_FALIAS(execute, mysqli_stmt_execute, arginfo_mysqli_no_params)
