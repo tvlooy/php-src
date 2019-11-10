@@ -7,21 +7,21 @@ class mysqli_driver
 class mysqli
 {
     /**
-     * @param ?string $hostname
-     * @param ?string $username
-     * @param ?string $passwd
-     * @param ?string $dbname
+     * @param ?string $host
+     * @param ?string $user
+     * @param ?string $password
+     * @param ?string $database
      * @param ?int $port
      * @param ?string $socket
      */
-    public function __construct(?string $hostname = null, ?string $username = null, ?string $passwd = null, ?string $dbname = null, ?int $port = null, ?string $socket = null);
+    public function __construct(?string $host = null, ?string $user = null, ?string $password = null, ?string $database = null, ?int $port = null, ?string $socket = null);
 
     /**
-     * @param bool $automode
+     * @param bool $mode
      *
      * @return bool
      */
-    public function autocommit(bool $automode): bool;
+    public function autocommit(bool $mode): bool;
 
     /**
      * @param int $flags
@@ -772,11 +772,9 @@ function mysqli_get_client_stats(mysqli $mysqli_link): array {}
 function mysqli_get_charset(mysqli $mysqli_link): object {}
 
 /**
- * @param mysqli $mysqli_link
- *
  * @return string
  */
-function mysqli_get_client_info(mysqli $mysqli_link): string {}
+function mysqli_get_client_info(): string {}
 
 /**
  * @param mysqli $mysqli_link

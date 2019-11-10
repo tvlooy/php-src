@@ -1,16 +1,16 @@
 /* This is a generated file, edit the .stub.php file instead. */
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_class_mysqli___construct, 0, 0, 0)
-	ZEND_ARG_TYPE_INFO(0, hostname, IS_STRING, 1)
-	ZEND_ARG_TYPE_INFO(0, username, IS_STRING, 1)
-	ZEND_ARG_TYPE_INFO(0, passwd, IS_STRING, 1)
-	ZEND_ARG_TYPE_INFO(0, dbname, IS_STRING, 1)
+	ZEND_ARG_TYPE_INFO(0, host, IS_STRING, 1)
+	ZEND_ARG_TYPE_INFO(0, user, IS_STRING, 1)
+	ZEND_ARG_TYPE_INFO(0, password, IS_STRING, 1)
+	ZEND_ARG_TYPE_INFO(0, database, IS_STRING, 1)
 	ZEND_ARG_TYPE_INFO(0, port, IS_LONG, 1)
 	ZEND_ARG_TYPE_INFO(0, socket, IS_STRING, 1)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_class_mysqli_autocommit, 0, 1, _IS_BOOL, 0)
-	ZEND_ARG_TYPE_INFO(0, automode, _IS_BOOL, 0)
+	ZEND_ARG_TYPE_INFO(0, mode, _IS_BOOL, 0)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_class_mysqli_begin_transaction, 0, 0, _IS_BOOL, 0)
@@ -388,9 +388,7 @@ ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_mysqli_get_charset, 0, 1, IS_OBJ
 	ZEND_ARG_OBJ_INFO(0, mysqli_link, mysqli, 0)
 ZEND_END_ARG_INFO()
 
-ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_mysqli_get_client_info, 0, 1, IS_STRING, 0)
-	ZEND_ARG_OBJ_INFO(0, mysqli_link, mysqli, 0)
-ZEND_END_ARG_INFO()
+#define arginfo_mysqli_get_client_info arginfo_class_mysqli_character_set_name
 
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_mysqli_get_client_version, 0, 1, IS_LONG, 0)
 	ZEND_ARG_OBJ_INFO(0, mysqli_link, mysqli, 0)
@@ -398,11 +396,13 @@ ZEND_END_ARG_INFO()
 
 #define arginfo_mysqli_get_links_stats arginfo_mysqli_get_connection_stats
 
-#define arginfo_mysqli_get_host_info arginfo_mysqli_get_client_info
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_mysqli_get_host_info, 0, 1, IS_STRING, 0)
+	ZEND_ARG_OBJ_INFO(0, mysqli_link, mysqli, 0)
+ZEND_END_ARG_INFO()
 
 #define arginfo_mysqli_get_proto_info arginfo_mysqli_get_client_version
 
-#define arginfo_mysqli_get_server_info arginfo_mysqli_get_client_info
+#define arginfo_mysqli_get_server_info arginfo_mysqli_get_host_info
 
 #define arginfo_mysqli_get_server_version arginfo_mysqli_get_client_version
 
@@ -412,7 +412,7 @@ ZEND_END_ARG_INFO()
 
 #define arginfo_mysqli_init arginfo_class_mysqli_init
 
-#define arginfo_mysqli_info arginfo_mysqli_get_client_info
+#define arginfo_mysqli_info arginfo_mysqli_get_host_info
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_mysqli_insert_id, 0, 0, 1)
 	ZEND_ARG_OBJ_INFO(0, mysqli_link, mysqli, 0)
@@ -597,7 +597,7 @@ ZEND_END_ARG_INFO()
 
 #define arginfo_mysqli_stmt_sqlstate arginfo_mysqli_stmt_error
 
-#define arginfo_mysqli_sqlstate arginfo_mysqli_get_client_info
+#define arginfo_mysqli_sqlstate arginfo_mysqli_get_host_info
 
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_mysqli_ssl_set, 0, 6, _IS_BOOL, 0)
 	ZEND_ARG_OBJ_INFO(0, mysql_link, mysqli, 0)
